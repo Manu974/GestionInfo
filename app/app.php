@@ -19,3 +19,7 @@ $app->register(new Silex\Provider\AssetServiceProvider(), array(
     'assets.version' => 'v1'
 ));
 
+// Register services.
+$app['dao.printer'] = function ($app) {
+    return new GestionInfo\DAO\PrinterDAO($app['db']);
+};

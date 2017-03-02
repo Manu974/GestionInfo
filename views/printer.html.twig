@@ -1,0 +1,33 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<table class="table table-bordered table-striped table-condensed">
+   <caption>
+      <h4>Liste des Imprimantes en services</h4>
+   </caption>
+   <thead>
+      <tr>
+            <th>Nom</th>
+            <th>Adresse Ip</th>
+            <th>Localisation</th>
+            <th>Date d'achat</th>
+      </tr>
+   </thead>
+   <tbody>
+   {% for printer in printers %}
+   <tr>
+    <td>{{printer.name}}</td>
+    <td>{{printer.ip}}</td>
+    <td>{{printer.location}}</td>
+    <td>{{printer.achat}}</td>
+   </tr>
+    {% else %}
+        No comments printers
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

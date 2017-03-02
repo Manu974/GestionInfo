@@ -7,6 +7,6 @@ $app['db.options'] = array(
     'host'     => 'localhost',
     'port'     => '3306',
     'dbname'   => 'gestioninfo',
-    'user'     => 'gestion_user',
-    'password' => 'gestion',
+    'user'     => 'gestioninfo_user',
+    'password' => 'secret',
 );
