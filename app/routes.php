@@ -6,3 +6,6 @@ $app->get('/', "GestionInfo\Controller\HomeController::indexAction")
 
 $app->get('/printer', "GestionInfo\Controller\HomeController::printerAction")
 ->bind('printer');
+
+$app->get('/login', "GestionInfo\Controller\HomeController::loginAction")
+->bind('login');
