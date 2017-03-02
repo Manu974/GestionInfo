@@ -35,7 +35,7 @@ class Printer
      /**
      * Printer achat.
      *
-     * @var date
+     * @var \DateTime
      */
     private $achat;
 

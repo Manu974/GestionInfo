@@ -37,7 +37,7 @@ class PrinterDAO extends DAO
             'imp_name' => $printer->getName(),
             'imp_ip' => $printer->getIp(),
             'imp_location' => $printer->getLocation(),
-            'ipm_achat' => $printer->getAchat()
+            'ipm_achat' => $printer->getAchat()->format('Y-m-d')
 
             );
 

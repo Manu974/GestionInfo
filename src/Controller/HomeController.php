@@ -5,6 +5,8 @@ namespace GestionInfo\Controller;
 use Silex\Application;
 
 use Symfony\Component\HttpFoundation\Request;
+use GestionInfo\Domain\Printer;
+use GestionInfo\Form\Type\PrinterType;
 
 
 class HomeController {
@@ -26,10 +28,24 @@ class HomeController {
      * @param Request $request Incoming request
      * @param Application $app Silex application
      */
-      public function printerAction(Application $app) {
+      public function printerAction(Request $request, Application $app) {
         $printers = $app['dao.printer']->findAll();
-    
-        return $app['twig']->render('printer.html.twig', ['printers'=>$printers]);
+        $printerFormView = null ;
+
+        if ($app['security.authorization_checker']->isGranted('IS_AUTHENTICATED_FULLY')) {
+            // A user is fully authenticated : he can add comments
+            $printer = new Printer();
+            $user = $app['user'];
+            $printerForm = $app['form.factory']->create(PrinterType::class, $printer);
+            $printerForm->handleRequest($request);
+            if ($printerForm->isSubmitted() && $printerForm->isValid()) {
+                $app['dao.printer']->save($printer);
+                $app['session']->getFlashBag()->add('success', 'Your printer was successfully added.');
+            }
+            $printerFormView = $printerForm->createView();
+        }
+
+        return $app['twig']->render('printer.html.twig', ['printers'=>$printers, 'printerForm' => $printerFormView]);
         }
 
            /**

@@ -4,7 +4,8 @@
 $app->get('/', "GestionInfo\Controller\HomeController::indexAction")
 ->bind('home');
 
-$app->get('/printer', "GestionInfo\Controller\HomeController::printerAction")
+// Home page
+$app->match('/printer', "GestionInfo\Controller\HomeController::printerAction")
 ->bind('printer');
 
 $app->get('/login', "GestionInfo\Controller\HomeController::loginAction")

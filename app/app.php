@@ -34,7 +34,15 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
     ),
 ));
 
+$app->register(new Silex\Provider\FormServiceProvider());
+$app->register(new Silex\Provider\LocaleServiceProvider());
+$app->register(new Silex\Provider\TranslationServiceProvider());
+
 // Register services.
 $app['dao.printer'] = function ($app) {
     return new GestionInfo\DAO\PrinterDAO($app['db']);
+};
+
+$app['dao.user'] = function ($app) {
+    return new GestionInfo\DAO\UserDAO($app['db']);
 };

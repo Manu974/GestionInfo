@@ -22,12 +22,59 @@
     <td>{{printer.name}}</td>
     <td>{{printer.ip}}</td>
     <td>{{printer.location}}</td>
-    <td>{{printer.achat}}</td>
+    <td>{{printer.achat|date('Y-m-d')}}</td>
    </tr>
     {% else %}
         No comments printers
     {% endfor %}
     </tbody>
 </table>
+
+
+<h3>Add a printer</h3>
+    {% if printerForm %}
+        {{ form_start(printerForm) }}
+            <div class="form-group">
+                {{ form_errors(printerForm.name) }}
+                {{ form_widget(printerForm.name, { 'attr':  {
+                    'rows': '4',
+                    'class': 'form-control',
+                    'placeholder': 'Enter your printer'
+                }}) }}
+
+
+                {{ form_errors(printerForm.ip) }}
+                {{ form_widget(printerForm.ip, { 'attr':  {
+                    'rows': '4',
+                    'class': 'form-control',
+                    'placeholder': 'Enter your printer ip'
+                }}) }}
+
+                {{ form_errors(printerForm.location) }}
+                {{ form_widget(printerForm.location, { 'attr':  {
+                    'rows': '4',
+                    'class': 'form-control',
+                    'placeholder': 'Enter location of the printer'
+                }}) }}
+
+                {{ form_errors(printerForm.achat) }}
+                {{ form_widget(printerForm.achat, { 'attr':  {
+                    'rows': '4',
+                    'class': 'form-control',
+                    'placeholder': 'Enter purchase date'
+                }}) }}
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Publish comment" />
+            </div>
+        {{ form_end(printerForm) }}
+        {% for flashMessage in app.session.flashbag.get('success') %}
+            <div class="alert alert-success">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+    {% else %}
+        <a href="{{ path('login')}}">Log in</a> to add printers.
+    {% endif %}
 
 {% endblock %}
