@@ -13,6 +13,6 @@
         "symfony/validator": "~2.8|3.0.*"
     },
     "autoload": {
-        "psr-4": {"MicroCMS\\": "src"}
+        "psr-4": {"GestionInfo\\": "src"}
     }
 }

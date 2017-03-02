@@ -44,9 +44,9 @@ class ComposerStaticInit64f226bfdf34dcab7580b768505ea281
         array (
             'Psr\\Log\\' => 8,
         ),
-        'M' => 
+        'G' => 
         array (
-            'MicroCMS\\' => 9,
+            'GestionInfo\\' => 12,
         ),
         'D' => 
         array (
@@ -149,7 +149,7 @@ class ComposerStaticInit64f226bfdf34dcab7580b768505ea281
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
         ),
-        'MicroCMS\\' => 
+        'GestionInfo\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
