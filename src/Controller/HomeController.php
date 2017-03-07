@@ -30,6 +30,7 @@ class HomeController {
      */
       public function printerAction(Request $request, Application $app) {
         $printers = $app['dao.printer']->findAll();
+        $cartridges = $app['dao.cartridge']->findAll();
         $printerFormView = null ;
 
         if ($app['security.authorization_checker']->isGranted('IS_AUTHENTICATED_FULLY')) {
@@ -45,7 +46,7 @@ class HomeController {
             $printerFormView = $printerForm->createView();
         }
 
-        return $app['twig']->render('printer.html.twig', ['printers'=>$printers, 'printerForm' => $printerFormView]);
+        return $app['twig']->render('printer.html.twig', ['printers'=>$printers,'cartridges'=>$cartridges, 'printerForm' => $printerFormView]);
         }
 
            /**

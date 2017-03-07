@@ -60,3 +60,7 @@ $app['dao.printer'] = function ($app) {
 $app['dao.user'] = function ($app) {
     return new GestionInfo\DAO\UserDAO($app['db']);
 };
+
+$app['dao.cartridge'] = function ($app) {
+    return new GestionInfo\DAO\CartridgeDAO($app['db']);
+};

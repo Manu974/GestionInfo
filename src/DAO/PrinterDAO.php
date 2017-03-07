@@ -31,7 +31,7 @@ class PrinterDAO extends DAO
      *
      * @param integer $id The user id.
      *
-     * @return \GestionInfo\Domain\Printer|throws an exception if no matching user is found
+     * @return \GestionInfo\Domain\Cartridge|throws an exception if no matching user is found
      */
     public function find($id) {
         $sql = "select * from imp where imp_id=?";
@@ -46,7 +46,7 @@ class PrinterDAO extends DAO
     /**
      * Saves a printer into the database.
      *
-     * @param \GestionInfo\Domain\Printer $printer The printer to save
+     * @param \GestionInfo\Domain\Cartridge $printer The printer to save
      */
     public function save(Printer $printer) {
         $printerData = array(
@@ -84,7 +84,7 @@ class PrinterDAO extends DAO
      * Creates an Article object based on a DB row.
      *
      * @param array $row The DB row containing Printers data.
-     * @return \GestionInfo\Domain\Printer
+     * @return \GestionInfo\Domain\Cartridge
      */
     protected function buildDomainObject(array $row) {
         $printer= new Printer();

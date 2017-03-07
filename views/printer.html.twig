@@ -3,8 +3,21 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
+<h2 class="text-center">Gestion imprimante</h2>
+<div class="row">
+    <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+        <ul class="nav nav-tabs nav-justified">
+            <li class="active"><a href="#printers" data-toggle="tab">Imprimantes</a></li>
+            
+            <li><a href="#cartridges" data-toggle="tab">Stock cartouches</a></li>
+        </ul>
+    </div>
+</div>
 
-<table class="table table-bordered table-striped table-condensed">
+
+<div class="tab-content">
+  <div id="printers" class="tab-pane fade in active">
+    <table class="table table-bordered table-striped table-condensed">
    <caption>
       <h4>Liste des Imprimantes en services</h4>
    </caption>
@@ -41,23 +54,25 @@
                     'class': 'form-control',
                     'placeholder': 'Enter your printer'
                 }}) }}
-
-
-                {{ form_errors(printerForm.ip) }}
+            </div>
+            <div class="form-group">
+            {{ form_errors(printerForm.ip) }}
                 {{ form_widget(printerForm.ip, { 'attr':  {
                     'rows': '4',
                     'class': 'form-control',
                     'placeholder': 'Enter your printer ip'
                 }}) }}
-
-                {{ form_errors(printerForm.location) }}
+            </div>
+            <div class="form-group">
+            {{ form_errors(printerForm.location) }}
                 {{ form_widget(printerForm.location, { 'attr':  {
                     'rows': '4',
                     'class': 'form-control',
                     'placeholder': 'Enter location of the printer'
                 }}) }}
-
-                {{ form_errors(printerForm.achat) }}
+            </div>
+            <div class="form-group">
+            {{ form_errors(printerForm.achat) }}
                 {{ form_widget(printerForm.achat, { 'attr':  {
                     'rows': '4',
                     'class': 'form-control',
@@ -76,5 +91,41 @@
     {% else %}
         <a href="{{ path('login')}}">Log in</a> to add printers.
     {% endif %}
+  </div>
+
+
+
+  <div id="cartridges" class="tab-pane fade">
+  <table class="table table-bordered table-striped table-condensed">
+   <caption>
+      <h4>Stock des cartouches</h4>
+   </caption>
+   <thead>
+      <tr>
+            <th>Type d'imprimante</th>
+            <th>type de Cartouche</th>
+            <th>Nom de Cartouche</th>
+            <th>Quantite en stock</th>
+      </tr>
+   </thead>
+   <tbody>
+   {% for cartridge in cartridges %}
+   <tr>
+    <td>{{cartridge.printerstype}}</td>
+    <td>{{cartridge.inktype}}</td>
+    <td>{{cartridge.inkname}}</td>
+    <td>{{cartridge.quantite}}</td>
+   </tr>
+    {% else %}
+        No comments cartridges
+    {% endfor %}
+    </tbody>
+</table>
+   
+  </div>
+  
+</div>
+
+
 
 {% endblock %}
