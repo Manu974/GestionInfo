@@ -60,6 +60,55 @@ class HomeController {
             'last_username' => $app['session']->get('_security.last_username'),
         ));
     }
+
+
+    public function adminAction (Application $app) {
+
+        $printers = $app['dao.printer']->findAll();
+        $users = $app['dao.user']->findAll();
+         return $app['twig']->render('admin.html.twig', array(
+        'printers' => $printers,
+        'users' => $users));
+    }
+
+    public function addAction(Request $request, Application $app) {
+
+        $printer = new Printer();
+    $printerForm = $app['form.factory']->create(PrinterType::class, $printer);
+    $printerForm->handleRequest($request);
+    if ($printerForm->isSubmitted() && $printerForm->isValid()) {
+        $app['dao.printer']->save($printer);
+        $app['session']->getFlashBag()->add('success', 'The printer was successfully created.');
+    }
+    return $app['twig']->render('printer_form.html.twig', array(
+        'title' => 'New printer',
+        'printerForm' => $printerForm->createView()));
+    }
+
+    public function editAction (Request $request, Application $app,$id) {
+        $printer = $app['dao.printer']->find($id);
+        
+
+    $printerForm = $app['form.factory']->create(PrinterType::class, $printer);
+        
+    $printerForm->handleRequest($request);
+    
+    if ($printerForm->isSubmitted() && $printerForm->isValid()) {
+        $app['dao.printer']->save($printer);
+        $app['session']->getFlashBag()->add('success', 'The printer was successfully updated.');
+    }
+    return $app['twig']->render('printer_form.html.twig', array(
+        'title' => 'Edit printer',
+        'printerForm' => $printerForm->createView()));
+    }
+
+    public function deleteAction(Request $request, Application $app,$id) {
+        
+    $app['dao.printer']->delete($id);
+    $app['session']->getFlashBag()->add('success', 'The printer was successfully removed.');
+    // Redirect to admin home page
+    return $app->redirect($app['url_generator']->generate('admin'));
+    }
     
     
 }

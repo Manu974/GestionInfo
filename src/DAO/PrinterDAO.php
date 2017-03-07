@@ -27,6 +27,23 @@ class PrinterDAO extends DAO
     }
 
     /**
+     * Returns a user matching the supplied id.
+     *
+     * @param integer $id The user id.
+     *
+     * @return \GestionInfo\Domain\Printer|throws an exception if no matching user is found
+     */
+    public function find($id) {
+        $sql = "select * from imp where imp_id=?";
+        $row = $this->getDb()->fetchAssoc($sql, array($id));
+
+        if ($row)
+            return $this->buildDomainObject($row);
+        else
+            throw new \Exception("No user matching id " . $id);
+    }
+
+    /**
      * Saves a printer into the database.
      *
      * @param \GestionInfo\Domain\Printer $printer The printer to save
@@ -37,7 +54,7 @@ class PrinterDAO extends DAO
             'imp_name' => $printer->getName(),
             'imp_ip' => $printer->getIp(),
             'imp_location' => $printer->getLocation(),
-            'ipm_achat' => $printer->getAchat()->format('Y-m-d')
+            'ipm_achat' => $printer->getAchat()
 
             );
 
@@ -51,6 +68,16 @@ class PrinterDAO extends DAO
             $id = $this->getDb()->lastInsertId();
             $printer->setId($id);
         }
+    }
+
+    /**
+     * Removes an article from the database.
+     *
+     * @param integer $id The printer id.
+     */
+    public function delete($id) {
+        // Delete the article
+        $this->getDb()->delete('imp', array('imp_id' => $id));
     }
 
     /**

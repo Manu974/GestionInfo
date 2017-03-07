@@ -19,23 +19,10 @@ class PrinterType extends AbstractType
 
     public function getName()
     {
-        return 'name';
+        return 'printer';
     }
 
-    public function getIp()
-    {
-        return 'ip';
-    }
-
-    public function getLocation()
-    {
-        return 'location';
-    }
-
-    public function getAchat()
-    {
-        return 'achat';
-    }
+    
 
 
 }
