@@ -6,7 +6,7 @@ use Silex\Application;
 
 use Symfony\Component\HttpFoundation\Request;
 use GestionInfo\Domain\Cartridge;
-use GestionInfo\Form\Type\PrinterType;
+use GestionInfo\Form\Type\CartridgeType;
 
 
 class CartridgeController {
@@ -17,7 +17,7 @@ class CartridgeController {
 
         $cartridge = new Cartridge();
     $cartridgeForm = $app['form.factory']->create(CartridgeType::class, $cartridge);
-    $pcartridgeForm->handleRequest($request);
+    $cartridgeForm->handleRequest($request);
     if ($cartridgeForm->isSubmitted() && $cartridgeForm->isValid()) {
         $app['dao.cartridge']->save($cartridge);
         $app['session']->getFlashBag()->add('success', 'The cartridge was successfully created.');

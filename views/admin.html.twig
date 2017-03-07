@@ -16,6 +16,8 @@
             <li class="active"><a href="#printers" data-toggle="tab">Printers</a></li>
             
             <li><a href="#users" data-toggle="tab">Users</a></li>
+
+            <li><a href="#cartridges" data-toggle="tab">Cartouches</a></li>
         </ul>
     </div>
 </div>
@@ -73,10 +75,65 @@
         {% endif %}
         <a href="{{ path('admin_printer_add') }}"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add article</button></a>
     </div>
-    <div class="tab-pane fade adminTable" id="comments">
-        <!-- TODO Insérer ici le code de gestion des commentaires -->
+
+
+
+    <div class="tab-pane fade adminTable" id="cartridges">
+        {% if cartridges %}
+        <div class="table-responsive">
+            <table class="table table-hover table-condensed">
+                <thead>
+                    <tr>
+                        <th>Type d'imprimante</th>
+                        <th>type de Cartouche</th>
+                        <th>Nom de Cartouche</th>
+                        <th>Quantite en stock</th>  
+                    </tr>
+                </thead>
+                {% for cartridge in cartridges %}
+                <tr>
+                    <td>{{ cartridge.printerstype }}</td>
+                    <td>{{ cartridge.inktype }}</td>
+                    <td>{{ cartridge.inkname}}</td>
+                    <td>{{ cartridge.quantite}}</td>
+                    <td>
+                        <a href="{{ path('admin_cartridge_edit', { 'id': cartridge.id }) }}" class="btn btn-info btn-xs" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+                        <button type="button" class="btn btn-danger btn-xs" title="Delete" data-toggle="modal" data-target="#cartridgeDialog{{ cartridge.id }}"><span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                        <div class="modal fade" id="cartridgeDialog{{ cartridge.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title" id="myModalLabel">Confirmation needed</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        Do you really want to delete this cartridge ?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                        <a href="{{ path('admin_cartridge_delete', { 'id': cartridge.id }) }}" class="btn btn-danger">Confirm</a>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div><!-- /.modal -->
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% else %}
+        <div class="alert alert-warning">No articles found.</div>
+        {% endif %}
+        <a href="{{ path('admin_cartridge_add') }}"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add article</button></a>
+
         
     </div>
+
+
+
+
+
     <div class="tab-pane fade adminTable" id="users">
         <!-- TODO Insérer ici le code de gestion des utilisateurs -->
         

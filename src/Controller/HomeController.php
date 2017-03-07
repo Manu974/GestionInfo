@@ -67,9 +67,11 @@ class HomeController {
 
         $printers = $app['dao.printer']->findAll();
         $users = $app['dao.user']->findAll();
+        $cartridges = $app['dao.cartridge']->findAll();
          return $app['twig']->render('admin.html.twig', array(
         'printers' => $printers,
-        'users' => $users));
+        'users' => $users,
+        'cartridges' => $cartridges));
     }
 
     public function addAction(Request $request, Application $app) {
