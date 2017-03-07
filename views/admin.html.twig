@@ -26,15 +26,18 @@
             <table class="table table-hover table-condensed">
                 <thead>
                     <tr>
-                        <th>Title</th>
-                        <th>Content</th>
-                        <th></th>  <!-- Actions column -->
+                        <th>Nom</th>
+                        <th>Adresse Ip</th>
+                        <th>Localisation</th>
+                        <th>Date de livraison</th>   
                     </tr>
                 </thead>
                 {% for printer in printers %}
                 <tr>
-                    <td><a class="printerTitle" href="{{ path('printer', { 'id': printer.id }) }}">{{ printer.name }}</a></td>
-                    <td>{{ printer.ip | truncate(60) }}</td>
+                    <td>{{ printer.name }}</td>
+                    <td><a class="printerTitle" href="http://{{printer.ip}}">{{ printer.ip }}</a></td>
+                    <td>{{ printer.location}}</td>
+                    <td>{{ printer.achat}}</td>
                     <td>
                         <a href="{{ path('admin_printer_edit', { 'id': printer.id }) }}" class="btn btn-info btn-xs" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
                         <button type="button" class="btn btn-danger btn-xs" title="Delete" data-toggle="modal" data-target="#printerDialog{{ printer.id }}"><span class="glyphicon glyphicon-remove"></span>

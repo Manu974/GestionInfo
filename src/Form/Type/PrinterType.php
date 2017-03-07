@@ -14,7 +14,7 @@ class PrinterType extends AbstractType
         $builder->add('name', TextType::class);
         $builder->add('ip', TextType::class);
         $builder->add('location', TextType::class);
-        $builder->add('achat', DateType::class);
+        $builder->add('achat', TextType::class);
     }
 
     public function getName()

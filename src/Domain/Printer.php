@@ -35,14 +35,11 @@ class Printer
      /**
      * Printer achat.
      *
-     * @var \DateTime
+     * @var string
      */
     private $achat;
 
-    public function __construct() {
-        
-        $this->date = new \DateTime();
-    }   
+   
     public function getId() {
         return $this->id;
     }
